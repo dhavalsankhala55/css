@@ -489,3 +489,51 @@ h6 {
   margin: 0;
   padding: 0;
 }
+
+jQuery(document).ready(function () {
+
+  // Add state change to header on scroll  ****************************** //
+
+  if (jQuery("#masthead").length) {
+    var header = jQuery("#masthead");
+    jQuery(window).scroll(function () {
+      var scroll = jQuery(window).scrollTop();
+      if (scroll >= 20) {
+        header.addClass("header-scroll");
+      } else {
+        header.removeClass("header-scroll");
+      }
+    });
+  }
+
+    // Faq //
+
+  if (jQuery(".faqs__wrapper").length) {
+    jQuery('.faq-single:first-of-type').addClass('active');
+    jQuery('.faq-single:first-of-type .faq-content').slideDown();
+
+    jQuery('.faq-single').click(function () {
+      if (jQuery(this).hasClass('active')) {
+      } else {
+        jQuery(".faq-single").removeClass('active');
+        jQuery(this).addClass('active');
+        jQuery('.faq-content').slideUp();
+        jQuery(this).find('.faq-content').slideDown();
+      }
+    });
+  } 
+ });
+
+   header.site-header {
+    position: fixed;
+    width: 100%;
+    z-index: 997;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #f0f1ee;
+    padding: 24px 0;
+    height: 94px;
+    -webkit-box-shadow: 0 8px 24px 0 rgba(0, 0, 0, .15);
+    box-shadow: 0 8px 24px 0 rgba(0, 0, 0, .15);
+}

@@ -537,3 +537,39 @@ jQuery(document).ready(function () {
     -webkit-box-shadow: 0 8px 24px 0 rgba(0, 0, 0, .15);
     box-shadow: 0 8px 24px 0 rgba(0, 0, 0, .15);
 }
+
+    // Service Tabbed Content  ****************************** //
+
+    if (jQuery(".service-tab-wrapper").length) {
+      var jQueryservicewrapper = jQuery(".service-tab-wrapper"),
+        jQueryserviceallTabs = jQueryservicewrapper.find(
+          ".service-tab-content-slide > div.service-tab-content__wrapper"
+        ),
+      jQueryservicetabMenu = jQueryservicewrapper.find(".service-tab-menu li");
+  
+      jQueryserviceallTabs.not(":first-of-type").hide();
+      jQueryservicetabMenu.filter(":first-of-type").addClass("active");
+      jQueryservicetabMenu.filter(":first-of-type").find(":first").width("100%");
+  
+      jQueryservicetabMenu.each(function (j) {
+        jQuery(this).attr("data-tab", "tab" + j);
+      });
+  
+      jQueryserviceallTabs.each(function (j) {
+        jQuery(this).attr("data-tab", "tab" + j);
+      });
+  
+      jQueryservicetabMenu.on("click", function () {
+        var dataTab = jQuery(this).data("tab"),
+          jQueryservicegetWrapper = jQuery(this).closest(jQueryservicewrapper);
+  
+        jQueryservicegetWrapper.find(jQueryservicetabMenu).removeClass("active");
+        jQuery(this).addClass("active");
+  
+        jQueryservicegetWrapper.find(jQueryserviceallTabs).hide();
+        jQueryservicegetWrapper
+          .find(jQueryserviceallTabs)
+          .filter("[data-tab=" + dataTab + "]")
+          .show();
+      });
+    }

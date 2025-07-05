@@ -490,6 +490,54 @@ h6 {
   padding: 0;
 }
 
+header.site-header {
+    position: fixed;
+    width: 100%;
+    z-index: 997;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #f0f1ee;
+    padding: 24px 0;
+    height: 94px;
+    -webkit-box-shadow: 0 8px 24px 0 rgba(0, 0, 0, .15);
+    box-shadow: 0 8px 24px 0 rgba(0, 0, 0, .15);
+}
+
+.hamburger {
+    width: 25px;
+}
+.hamburger .hamburger__line {
+    width: 100%;
+    height: 2px;
+    background-color: var(--dark-black);
+}
+.hamburger .hamburger__line.middle {
+    margin: 6px 0;
+}
+.menu-toggle.toggle .top {
+    transform: rotate(-45deg) translate(-6px,6px);
+}
+.menu-toggle.toggle .middle {
+    opacity: 0;
+}
+.menu-toggle.toggle .bottom {
+    transform: rotate(45deg) translate(-4px,-6px);
+}
+
+.mobile-navigation {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: clamp(33%,15rem,70%);
+    height: 100vh;
+    background-color: var(--white-color);
+    transition: ease-in-out left .3s;
+    padding-top: 98px;
+    padding-bottom: 50px;
+    overflow-y: scroll;
+    z-index: 98;
+}
 jQuery(document).ready(function () {
 
   // Add state change to header on scroll  ****************************** //
@@ -523,20 +571,6 @@ jQuery(document).ready(function () {
     });
   } 
  });
-
-   header.site-header {
-    position: fixed;
-    width: 100%;
-    z-index: 997;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #f0f1ee;
-    padding: 24px 0;
-    height: 94px;
-    -webkit-box-shadow: 0 8px 24px 0 rgba(0, 0, 0, .15);
-    box-shadow: 0 8px 24px 0 rgba(0, 0, 0, .15);
-}
 
     // Service Tabbed Content  ****************************** //
 
@@ -572,4 +606,39 @@ jQuery(document).ready(function () {
           .filter("[data-tab=" + dataTab + "]")
           .show();
       });
+
+       // Header Mobile Menu
+      $('.menu-toggle').on('click', function () {
+          $(this).toggleClass('toggle');
+  
+          if ($(this).hasClass('toggle')) {
+              $('.mobile-navigation').addClass('active');
+              $('body').addClass('menu-active');
+          } else {
+              $('.mobile-navigation').removeClass('active');
+              $('body').removeClass('menu-active');
+          }
+      });
     }
+
+
+<div class="menu-toggle hamburger">
+    <div class="hamburger__line top"></div>
+    <div class="hamburger__line middle"></div>
+    <div class="hamburger__line bottom"></div>
+</div>
+
+<div class="mobile-navigation">
+  <nav class="mobile-nav">
+      <ul>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Learn More</a></li>
+          <li><a href="#">Rewards</a></li>
+          <li><a href="#">Pros</a></li>
+      </ul>
+  </nav>
+</div>
+
+
+       
